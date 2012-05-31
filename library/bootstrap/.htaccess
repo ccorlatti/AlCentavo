@@ -1,0 +1,7 @@
+#AUTOSTART
+AuthType Basic
+AuthName "nonono no se puede entrar"
+AuthUserFile /www/duenomas.com.ar//htdocs/admin/.htpasswd
+Require valid-user
+AddDefaultCharset UTF-8
+#AUTOSTOP
