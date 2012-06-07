@@ -10,12 +10,16 @@ session_start();
 
 //constants definition
 define('SITE', 'alcentavo');
+//define('SITE', '');
 define('SITE_URL', 'http://www.al-centavo.com/');
+//define('SITE_URL', 'http://www.corlatti.com.ar/');
 define('SITE_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE . '/');
 define('LIBRARY_FOLDER', SITE_FOLDER . 'library/');
 define('MODEL_FOLDER', LIBRARY_FOLDER . 'dao/');
 define('DB_NAME','alcentavo');
+//define('DB_NAME','alcentavotest');
 define('CONNECTION_STRING', 'mysql://root:ade3saq1@localhost/' . DB_NAME);
+//define('CONNECTION_STRING', 'mysql://alcentavotest:ade3saq1@192.168.0.193/' . DB_NAME);
 
 define('FILE_TRANSACTIONS_IMPORT_DESTINATION',SITE_FOLDER . 'upload/transactions/');
 

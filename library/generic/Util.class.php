@@ -32,7 +32,7 @@ final class Util {
 		return $string;
 	}
 	
-	public static function sendmail($to, $subject, $body, $from='no-reply@fuia.com.ar'){
+	public static function sendmail($to, $subject, $body, $from='no-reply@al-centavo.com'){
 		try {
 			$resultado = mail($to, $subject, $body, "From: $from\nContent-Type: text/html; charset=iso-8859-1");
 			if(!$resultado){

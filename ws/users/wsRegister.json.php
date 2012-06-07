@@ -18,6 +18,10 @@ try {
 
 	$userManagment = new UserManagment();
 	$userManagment->register($name,  $email, $email, $password);
+	
+	
+	
+	
 
 } catch (Exception $e){
 	$output->result['error'] = true;

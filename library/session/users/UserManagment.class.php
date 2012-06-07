@@ -15,6 +15,7 @@ class UserManagment {
 		try {
 			
 			$this->checkExists($username, $mail);
+			$validationCode = sha1($username . $mail);
 			
 			$user = new User();
 			$user['email'] = $mail;
@@ -24,7 +25,13 @@ class UserManagment {
 			$user['validationCode'] = sha1($username . $mail);
 			$user->save();
 			
+			//user disabled to avoid login on inactive accounts
 			$user->delete();
+			
+			$this->emailConfirmation($user['id'], $name, $validationCode, $mail);
+			
+			
+			
 			
 			$result = $user['id'];
 			
@@ -33,6 +40,54 @@ class UserManagment {
 		}
 		return $result;
 	}
+	
+	
+	private function emailConfirmation($id, $name, $validationCode, $mail){
+		try {
+				
+			$tpl = new CCTemplate('../../static/');
+			$tpl->cInit('emailBienvenida.html');
+			$tpl->cSet('NAME',$name);
+			
+			$url = SITE_URL . 'activate.php?id='. $id . '&key=' . $validationCode;
+			$subject = 'Bienvenido a Al-Centavo! - Activa tu cuenta';
+			
+			$tpl->cSet('URL', $url);
+			
+			Util::sendmail($mail, $subject, $tpl->cGetString());
+			
+		} catch (Exception  $e) {
+			throw $e;
+		}		
+	}
+	
+	
+	
+	public function activate($id, $validationCode){
+		try {
+			$dao = Doctrine::getTable('User');
+			$q = $dao->createQuery()
+					->update(' User u ')
+					->set('active', '\'' . date('Y-m-d H:i:s') . '\'')
+					->set('deleted', 'null')
+					->where(' 1=1 ')
+					->addWhere(' u.validationCode = \'' . $validationCode . '\'')
+					->addWhere(' u.id = ' . $id)
+					->addWhere(' u.active is null ');
+			$affected = $q->execute();
+			
+			if($affected < 1){
+				throw new Exception('El usuario ya esta activo o la clave es incorrecta.');
+			}
+						
+				
+		} catch (Exception  $e) {
+			throw $e;
+		}
+	}
+	
+	
+	
 	
 	
 	public function checkExists($username, $mail){
