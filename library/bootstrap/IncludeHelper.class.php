@@ -1,7 +1,6 @@
 <?php
 /**
- * Esta clase intenta resolver (workaround) 
- * el problema de los includes anidados
+ * workaround nested includes
  *
  * $Id: IncludeHelper.class.php 12 2010-07-06 04:34:57Z corlatti $
  * @author Claudio Corlatti
@@ -13,7 +12,7 @@ final class IncludeHelper {
 		try {
 			require_once SITE_FOLDER . $path;
 		} catch (Exception $ex){
-			echo $ex->getMessage();
+			throw $ex;
 		}
 	}
 	

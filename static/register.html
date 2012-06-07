@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>AlCentavo - Nuevo usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 80px;
+      }
+      
+      .formErrorMessage {
+		color: #ff0000;
+      }
+    </style>
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+
+    <div class="navbar navbar-fixed-top" >
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <span class="brand"><img src="static/images/logo_big.png" alt="Al Centavo" title="Al Centavo"/></span>
+          <div class="nav-collapse">
+			<ul class="nav pull-right">
+              <li style="margin-top: 10px;">
+                <form class="navbar-form pull-left">
+                <input type="text" class="input-medium" placeholder="E-Mail">
+                <input type="text" class="input-medium" placeholder="Password">
+                <input type="checkbox" class="checkbox" />
+                &nbsp;<a href="#" class="btn btn-inverse"><i class="icon-white icon-lock"></i> Ingresar</a>
+                </form>
+			  </li> 
+              <li style="margin-top: 10px;" class="divider-vertical"></li>   
+              <li style="margin-top: 10px;">
+                <form class="navbar-form pull-left">
+                <a href="#" class="btn btn-primary"><i class="icon-white icon-ok"></i> Soy nuevo!</a>
+                </form>
+			  </li>                  
+	        </ul>            
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+    <div class="container">
+    
+    
+    <div class="row" >
+    <div class="span7">
+    
+        <div class="well" id="form" >
+            <h2>&iquest;Sos nuevo en el sitio?</h2>
+            <p>
+            &iexcl;Registrarte solo toma unos segundos!
+            </p>
+            <BR>
+            <!-- register form -->
+        <form class="form-horizontal" id="registerForm" name="registerForm" action="#" method="post">
+        <fieldset>
+            <div class="alert alert-error" id="error" style="display:none;" >
+             <h4 class="alert-heading">Ups!</h4>
+             <span id="errorMessage"></span>
+		    </div>
+            <div class="control-group">
+            <label class="control-label" for="name">Tu nombre</label>
+            <div class="controls">
+                <input type="text" name="name" id="name" class="input-xlarge" />  
+                <p class="help-block"><small>No es necesario tu nombre real, con tu nombre de pila o apodo basta.</small></p>          
+            </div>
+            </div>          
+        
+            <div class="control-group">
+            <label class="control-label" for="email">Tu E-Mail</label>
+            <div class="controls">
+                <input type="text" name="email" id="email" class="input-xlarge" />  
+                <p class="help-block"><small>Ser&aacute; utilizado como tu nombre de usuario para ingresar al sitio.</small></p>          
+            </div>
+            </div>          
+        
+            <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" name="password" id="password" class="input-large" /> 
+                <p class="help-block"><small>Tu clave de acceso puede incluir letras, numeros y simbolos.</small></p> 
+            </div>
+            </div>  
+            
+           <div class="control-group">
+            <label class="control-label" for="confirmPassword">Confirm&aacute; tu password</label>
+            <div class="controls">
+                <input type="password" name="confirmPassword" id="confirmPassword" class="input-large" />
+                <p class="help-block"><small>Solo para confirmar.</small></p>  
+            </div>
+            </div>                     
+        
+            <p align="center">
+            <a href="#"  class="btn btn-large btn-primary" id="registerButton"><strong>Registrarme y comenzar </strong><i class="icon-white icon-play"></i></a>
+            <span id="registerFormLoading" style="display:none;"><img src="static/images/loading.gif" alt="Loading..." /></span>
+            </p>
+            <br>
+            <p align="center" class="help-block"><small>Registrandote declaras que estas de acuerdo con los <a href="#">Terminos de uso</a> y la <a href="#">Politica de privacidad</a> del sitio.</small></p> 
+            
+        </fieldset>
+        </form>
+        
+        <!-- /register form -->        
+
+        </div>
+    
+    	<div id="confirmation" style="display:none;">
+        <br><br>
+        <div class="well ">
+            <h2>Bienvenido y gracias por registrarte!</h2>
+            <h3></h3>
+            <p>
+            En unos momentos recibiras un un E-Mail con las instrucciones para activar tu cuenta. Es realmente muy simple, solo hacer click en un enlace y ya estaras listo para comenzar!.
+            </p>
+            <br><br>
+                <div class="alert alert-info">
+                <h4 class="alert-heading">Importante!</h4>
+            <p>
+            Si han pasado unos minutos y aun no recibes el correo de activacion, por favor dale un vistazo a tu carpeta de "Correo no deseado" o "Spam", es posible que haya sido filtrado por tu cliente de correo.
+            </p>                </div>
+
+            <BR>     
+
+        </div>    
+    	</div>
+    
+    </div>
+    <div class="span5">
+    
+        <div >
+       
+            <br><br>  
+            <p><img src="static/images/signin/security.png" align="left" style="margin:5px;" /><br>
+            Toda la actividad del sitio se realiza a traves de conexiones seguras con datos encriptados. Podes conocer mas acerca de nuestra arquitectura segura en nuestro <a href="#">sitio de ayuda</a>
+            </p>
+
+            <br><br>              <br><br>  
+            <p><img src="static/images/signin/nopersonaldata.png" align="left"style="margin:5px;" /><br>
+            En ningun momento el sitio te solicitara informacion personal, numeros de cuenta ni datos de tarjetas de credito. Los datos del formulario de registro son los unicos obligatorios para utilizar el sitio.
+            </p>
+            
+            <br><br>              <br><br>  
+            <p><img src="static/images/signin/help.png" align="left"style="margin:5px;" /><br>
+            No estas solo! Siempre contas con nuestro completo <a href="#">sitio de ayuda</a> en linea, desde la <a href="#">guia de primeros pasos</a> hasta la documentacion mas avanzada. Tambien podes <a href="#">contactarnos</a> si tenes alguna sugerencia o consulta.
+            </p>            
+            
+            
+        </div>    
+    
+    </div>
+    </div>
+
+      <!-- Example row of columns -->
+      
+
+      <hr> 
+	<div class="row">
+        <div class="span12">
+        
+              <div class="navbar " >
+                <div class="navbar-inner">
+                  <div class="container">
+                  		<span class="brand">Particip&aacute; del sitio</span>
+                        <ul class="nav">
+                        <li class="divider-vertical"></li>
+                         <li ><a href="#resumen"><i class="icon-comment icon-white"></i> Dejanos tu idea</a></li>
+                         <li class="divider-vertical"></li>
+                         <li><a href="#operaciones"><i class="icon-fire icon-white"></i> Report&aacute; un error</a></li>
+                         <li class="divider-vertical"></li>
+                         <li><a href="#operaciones"><i class="icon-road icon-white"></i> Roadmap</a></li>
+                         <li class="divider-vertical"></li>
+                         <li><a href="#operaciones"><i class="icon-envelope icon-white"></i> Contacto</a></li>
+                         <li class="divider-vertical"></li>
+                        </ul>
+                        
+                        <ul class="nav pull-right">
+                        <li >
+                        <a href="#"><img src="static/images/facebook.png" width="20" border=0/></a>
+                        </li>          
+                        <li >
+                        <a href="#"><img src="static/images/twitter.png" width="20"  border=0/></a>
+                        </li>                                  
+                        </ul>                              
+                        
+                </div>
+               </div>
+              </div>        
+        
+        </div>    
+    </div>
+
+
+     
+	  <hr>
+	<footer class="footer">
+        <p class="pull-right"><img src="static/images/verisign.gif" /></p>
+        <p>&copy; 2012 - <strong>AlCentavo: Contabilidad y finanzas personales</strong> | <a href="#" class="privacy" >Politica de privacidad</a> | <a href="#" class="terms">Terminos y condiciones de uso</a> </p>
+        <p><small><a href="#" class="version">Version 0.1b</a></small></p> 
+        <p><small>Proudly developed in Argentina</small></p>        
+      </footer>
+    </div> 
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/jquery.validate.js"></script>
+    <script src="static/js/alcentavo/Register.helper.js"></script>
+
+  </body>
+</html>

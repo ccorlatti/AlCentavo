@@ -10,7 +10,7 @@ session_start();
 
 //constants definition
 define('SITE', 'alcentavo');
-define('SITE_URL', 'http://www.alcentavo.com.ar/');
+define('SITE_URL', 'http://www.al-centavo.com/');
 define('SITE_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE . '/');
 define('LIBRARY_FOLDER', SITE_FOLDER . 'library/');
 define('MODEL_FOLDER', LIBRARY_FOLDER . 'dao/');
@@ -33,7 +33,7 @@ IncludeHelper::inc('library/generic/CCTemplate.class.php');
 IncludeHelper::inc('library/generic/Util.class.php');
 
 //Doctrine DAO config and init
-IncludeHelper::inc('library/thirdParty/Doctrine.php');
+IncludeHelper::inc('library/thirdparty/Doctrine.php');
 
 spl_autoload_register(array('Doctrine', 'autoload'));
 $manager = Doctrine_Manager::getInstance();
