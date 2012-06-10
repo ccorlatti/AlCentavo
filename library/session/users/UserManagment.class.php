@@ -134,11 +134,12 @@ class UserManagment {
 				->addWhere(' ( u.username = ? or u.email = ? )', array($username, $username))
 				->addWhere(' u.password = ? ', sha1($password))
 				->addWhere(' u.deleted is null ')
+				->addWhere(' u.active is not null ')
 				->setHydrationMode(Doctrine::HYDRATE_ARRAY);
 			$rs = $q->fetchArray();			
 			
 			if(count($rs) < 1){
-				throw new Exception('Los datos que ingresaste no son correctos.');
+				throw new Exception('Los datos ingresados son incorrectos.');
 			} else {
 				$result = $rs[0];
 			}

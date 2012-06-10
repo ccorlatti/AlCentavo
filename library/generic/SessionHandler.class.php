@@ -7,17 +7,6 @@
 /**
  * Session handler
  * 
- * $_SESSION var structure
- * 
- * $_SESSION[
- * 		login => [ 
- * 					isLoggedIn,	userName,
- * 					groups => [ id, description ]
- * 				 ],
- * 		preferences => [ lang ],
- * 		personal => [ fullName, nickName, defaultMail ] 
- * ]
- *
  */
 final class SessionHandler {
 	
@@ -36,22 +25,40 @@ final class SessionHandler {
 	 * @param unknown_type $var
 	 * @param unknown_type $defaultValue
 	 * @return unknown
-	 * @todo tries to get the value from cookie
 	 */
-	public function getValue($var, $defaultValue){
+	public static function getValue($var, $defaultValue){
 		$resultado = $defaultValue;
 		try {
 			//tries to get the value from session
 			if(isset($_SESSION[$var])){
 				$resultado = $_SESSION[$var];
 			} else {
-				//tries to get the value from cookie
+				//TODO tries to get the value from cookie
 			}
 		} catch(Exception $e){
 			throw $e;
 		}
 		return $resultado;
 	}
+	
+	
+	public static function setValue($var, $value){
+		try {
+			$_SESSION[$var] = $value;
+		} catch(Exception $e){
+			throw $e;
+		}
+	}	
+	
+	public static function close(){
+		try {
+			$_SESSION[] = array();
+			session_destroy();
+		} catch(Exception $e){
+			throw $e;
+		}
+	}
+	
 }
 
 ?>
