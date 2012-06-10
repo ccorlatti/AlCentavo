@@ -36,9 +36,7 @@ try {
 				
 				SessionHandler::setValue('isLoggedIn', 1);
 				SessionHandler::setValue('user', $user);
-				
-				//print_r($_SESSION);
-				
+								
 				Util::irA('dashboard.php');
 				exit();
 			}

@@ -60,16 +60,23 @@ class SecurityCheck {
 		try {
 			
 			if(isset($_COOKIE[REMEMBER_COOKIE_NAME])){
-				parse_str($_COOKIE[$cookie_name]);
+				
+				parse_str($_COOKIE[REMEMBER_COOKIE_NAME]);
 				$password = $hash; 
 				
 				$userManagment = new UserManagment();
-				$user = $userManagment->login($username, $password, true);
-				if(is_array($user)){
-					SessionHandler::setValue('isLoggedIn', 1);
-					SessionHandler::setValue('user', $user);
-					$result = true;
-				} 
+				try {
+					$user = $userManagment->login($username, $password, true);
+					
+					if(is_array($user)){
+						SessionHandler::setValue('isLoggedIn', 1);
+						SessionHandler::setValue('user', $user);
+							
+						$result = true;
+					}					
+				} catch (Exception $e){
+				}
+				 
 				
 			}
 			 
@@ -82,6 +89,7 @@ class SecurityCheck {
 	
 	public static function checkSession(){
 		try {			
+			print_r($_SESSION);
 			if(SessionHandler::getValue('isLoggedIn', 0) == 0){
 				
 				if(!SecurityCheck::checkAutoLogin()){
