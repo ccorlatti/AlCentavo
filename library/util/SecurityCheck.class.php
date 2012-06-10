@@ -46,7 +46,7 @@ class SecurityCheck {
 	public static function remember($username, $password){
 		try {
 			
-			setcookie (REMEMBER_COOKIE_NAME, 'uusername=' . $username . '&hash=' . $password , time() + (3600 * 24 * 30));
+			setcookie (REMEMBER_COOKIE_NAME, 'username=' . $username . '&hash=' . $password , time() + (3600 * 24 * 30));
 
 		} catch (Exception $e){
 			throw $e;
