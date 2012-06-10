@@ -89,7 +89,7 @@ class SecurityCheck {
 	
 	public static function checkSession(){
 		try {			
-			print_r($_SESSION);
+			
 			if(SessionHandler::getValue('isLoggedIn', 0) == 0){
 				
 				if(!SecurityCheck::checkAutoLogin()){
