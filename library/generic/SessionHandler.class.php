@@ -52,12 +52,13 @@ final class SessionHandler {
 	
 	public static function close(){
 		try {
-			$_SESSION[] = array();
+			$_SESSION = array();
 			session_destroy();
 		} catch(Exception $e){
 			throw $e;
 		}
 	}
+	
 	
 }
 

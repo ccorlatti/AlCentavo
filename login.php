@@ -4,9 +4,8 @@
 *
 */
 require 'library/bootstrap/prepend.php';
-IncludeHelper::inc('library/generic/SessionHandler.class.php');
 IncludeHelper::inc('library/util/SecurityCheck.class.php');
-IncludeHelper::inc('library/session/users/UserManagment.class.php');
+
 
 $tpl = new CCTemplate('static/');
 $tpl->cInit('login.html');
@@ -15,23 +14,30 @@ try {
 	
 	$action = SecurityCheck::sanitize($_POST['action']);
 	
-	SessionHandler::close();
+	
 	
 	switch ($action){
 		case 'login':
+			
+			
 			$username = SecurityCheck::sanitize($_POST['email']);
 			$password = SecurityCheck::sanitize($_POST['password']);
+			$remember = SecurityCheck::sanitize($_POST['remember']);
 			
 			$userManagment = new UserManagment();
 			$user = $userManagment->login($username, $password);
 
 			if(is_array($user)){
 				
-				//erase encrypted password data
-				$user['password'] = '';
+				if(!empty($remember)){
+					SecurityCheck::remember($username, sha1($password));
+				}
 				
-				SessionHandler::setValue('isLoggedIn', true);
+				
+				SessionHandler::setValue('isLoggedIn', 1);
 				SessionHandler::setValue('user', $user);
+				
+				//print_r($_SESSION);
 				
 				Util::irA('dashboard.php');
 				exit();

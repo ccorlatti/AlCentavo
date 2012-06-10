@@ -23,6 +23,8 @@ define('CONNECTION_STRING', 'mysql://root:ade3saq1@localhost/' . DB_NAME);
 
 define('FILE_TRANSACTIONS_IMPORT_DESTINATION',SITE_FOLDER . 'upload/transactions/');
 
+define('REMEMBER_COOKIE_NAME', 'alc_rmmbr');
+
 //include helper to workaround nested includes problem
 require_once 'IncludeHelper.class.php';
 

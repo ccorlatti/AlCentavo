@@ -8,13 +8,13 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/bootstrap.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <span class="brand"><img src="images/logo_small.png" alt="Al Centavo" title="Al Centavo"/></span>
+          <span class="brand"><img src="static/images/logo_small.png" alt="Al Centavo" title="Al Centavo"/></span>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active" ><a href="#resumen"><i class="icon-th icon-white"></i> <b>Escritorio</b></a></li>
@@ -59,7 +59,7 @@
             
 			<ul class="nav pull-right">
               <li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <b>Claudio Corlatti</b><b class="caret"></b></a>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <b>{USER_NAME}</b><b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 				<li><a href="#configuracion">Configuracion</a></li>
 				<li><a href="#configuracion">Cambiar password</a></li>   
@@ -111,111 +111,27 @@
 
 
 
-
-
-
-    <div class="alert alert-block">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Warning!</h4>
-    Best check yo self, you're not...
-    </div>
-
-    <div class="alert alert-error">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Error!</h4>
-    Best check yo self, you're not...
-    </div>
-
     <div class="alert alert-success">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Success!</h4>
-    Best check yo self, you're not...
-    </div>
-
-    <div class="alert alert-info">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Info!</h4>
-    Best check yo self, you're not...
-    </div>
-
-<div>
-    <div class="btn-group ">
-    <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
-    Action
-    <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-    <li><a href="#">Action 1</a></li>
-    <li><a href="#">Action 2</a></li>
-    <li><a href="#">Action 3</a></li>
-    <li><a href="#">Action 4</a></li>
-    </ul>
-    </div>
-    </div>
-      <h1>Bootstrap starter template</h1>
-
-      <span class="label label-success">Success</span>
-      <span class="label label-important">important</span>
-      <span class="label label-warning">Warning</span>
-      <span class="label label-info">Info</span>
-      <span class="label label-inverse">Inverse</span>
-      <span class="label">Default</span>
-
-      <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-    <div class="hero-unit">
-    <h1>Heading</h1>
-    <p>Tagline</p>
-    <p>
-    <a class="btn btn-primary btn-large">
-    Learn more
-    </a>
-    </p>
+    <a class="close" data-dismiss="alert">x</a>
+    <h4 class="alert-heading">Login correcto!</h4>
+    <h3>Hola {USER_NAME}</h3>
     </div>
 
 
 
-    <div class="pagination">
-    <ul>
-    <li><a href="#">Prev</a></li>
-    <li class="active">
-    <a href="#">1</a>
-    </li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">Next</a></li>
-    </ul>
-    </div>
-    <div class="alert alert-block">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Warning!</h4>
-    Best check yo self, you're not...
-    </div>
+	<footer class="footer">
+        <p class="pull-right"><img src="static/images/verisign.gif" /></p>
+        <p>&copy; 2012 - <strong>AlCentavo: Contabilidad y finanzas personales</strong></p>
+        <p><small>Proudly developed in Argentina</small></p>        
+      </footer>
 
-    <div class="alert alert-error">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Error!</h4>
-    Best check yo self, you're not...
-    </div>
-
-    <div class="alert alert-success">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Success!</h4>
-    Best check yo self, you're not...
-    </div>
-
-    <div class="alert alert-info">
-    <a class="close" data-dismiss="alert">�</a>
-    <h4 class="alert-heading">Info!</h4>
-    Best check yo self, you're not...
-    </div>
-    </div> <!-- /container -->
+</div><!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.js"></script>
 
   </body>
 </html>

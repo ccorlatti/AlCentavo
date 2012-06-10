@@ -123,16 +123,19 @@ class UserManagment {
 		return $result;		
 	}	
 
-	public function login($username, $password){
+	public function login($username, $password, $auto=false){
 		$result = false;
 		try {
 			$dao = Doctrine::getTable('User');
+			
+			$password = $auto ? $password : sha1($password);
+			
 			
 			$q = $dao->createQuery()
 				->from(' User u ')
 				->where(' 1=1 ')
 				->addWhere(' ( u.username = ? or u.email = ? )', array($username, $username))
-				->addWhere(' u.password = ? ', sha1($password))
+				->addWhere(' u.password = ? ', $password)
 				->addWhere(' u.deleted is null ')
 				->addWhere(' u.active is not null ')
 				->setHydrationMode(Doctrine::HYDRATE_ARRAY);
