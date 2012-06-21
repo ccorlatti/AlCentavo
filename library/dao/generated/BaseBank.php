@@ -21,6 +21,7 @@ abstract class BaseBank extends Doctrine_Record {
         $this->hasColumn('code', 'string', 6, array('type' => 'string', 'length' => 6, 'null' => true));
         $this->hasColumn('description', 'string', 60, array('type' => 'string', 'length' => 60, 'notnull' => true));
         $this->hasColumn('import', 'integer', 1, array('type' => 'integer', 'length' => 1, 'default' => '0', 'notnull' => true));
+        $this->hasColumn('country', 'integer', 4, array('type' => 'integer', 'length' => 4));
     }
 
     public function setUp()
@@ -28,6 +29,8 @@ abstract class BaseBank extends Doctrine_Record {
     	$this->actAs('Timestampable');
     	$this->actAs('SoftDelete');
     	    	
+    	$this->hasOne('Country', array('local' => 'country', 'foreign' => 'country_id' ));
+    	
         $this->hasMany('Account', array('local' => 'id',
                                         'foreign' => 'idBank'));
     }
