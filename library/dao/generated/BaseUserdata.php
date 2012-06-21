@@ -18,6 +18,8 @@ abstract class BaseUserdata extends Doctrine_Record {
         $this->setTableName('userdata');
         $this->hasColumn('idUser', 'integer', 4, array('type' => 'integer', 'length' => 4, 'primary' => true));
         $this->hasColumn('avatar', 'string', 255, array('type' => 'string', 'length' => 255));
+        $this->hasColumn('country', 'integer', 4, array('type' => 'integer', 'length' => 4));
+        $this->hasColumn('currency', 'integer', 4, array('type' => 'integer', 'length' => 4));
     }
 
     public function setUp()
@@ -27,6 +29,12 @@ abstract class BaseUserdata extends Doctrine_Record {
     	    	
         $this->hasOne('User', array('local' => 'idUser',
                                     'foreign' => 'id'));
+        
+        $this->hasOne('Country', array('local' => 'country',
+        		'foreign' => 'country_id'));
+
+        $this->hasOne('Currency', array('local' => 'currency',
+        		'foreign' => 'id'));        
     }
 }
 ?>

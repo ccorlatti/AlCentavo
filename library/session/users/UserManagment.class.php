@@ -133,6 +133,9 @@ class UserManagment {
 			
 			$q = $dao->createQuery()
 				->from(' User u ')
+				->leftJoin(' u.Userdata ud ')
+				->leftJoin(' ud.Country co ')
+				->leftJoin(' ud.Currency cu ')
 				->where(' 1=1 ')
 				->addWhere(' ( u.username = ? or u.email = ? )', array($username, $username))
 				->addWhere(' u.password = ? ', $password)

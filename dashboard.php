@@ -15,7 +15,6 @@ try {
 	
 	$tpl->cSet('USER_NAME', $_SESSION['user']['name']);
 	
-	print_r($_SESSION);
 	
 } catch (Exception $e){
 	$tpl->cSet('ERROR', $e->getMessage());

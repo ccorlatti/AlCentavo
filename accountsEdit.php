@@ -33,7 +33,10 @@ try {
 	}
 	
 	
-	
+	//country
+	$tpl->cSet('MY_COUNTRY_ISO',$_SESSION['user']['Userdata'][0]['Country']['iso2']);
+	$tpl->cSet('MY_COUNTRY_ID',$_SESSION['user']['Userdata'][0]['Country']['country_id']);
+	$tpl->cSet('MY_COUNTRY_DESCRIPTION',$_SESSION['user']['Userdata'][0]['Country']['short_name']);
 	
 	
 } catch (Exception $e){

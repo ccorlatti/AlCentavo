@@ -30,10 +30,24 @@
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/bootstrap-tooltip.js"></script>
     <script src="static/js/bootstrap-popover.js"></script>  
+    <script src="static/js/alcentavo/AccountManagment.helper.js"></script>
     <script language="javascript">
 	$(document).ready(function() {
 
-		$('.menuNuevoMovimiento').popover();
+		//load banks
+		var check = $('#onlyMyCountry');
+		AccountManagment.loadBanks(check.is(':checked') ? check.val() : '')
+		
+		//listeners
+		check.bind('change', function(){
+				var check = $('#onlyMyCountry');
+				AccountManagment.loadBanks(check.is(':checked') ? check.val() : '');
+		});
+		
+		var banks = $('#bank');
+		banks.bind('change', function(){
+			$('#bank option:selected').hasClass('noImport') ? $('#noImportBank').show() : $('#noImportBank').hide();
+		});
 
 	});
 
@@ -139,6 +153,12 @@
         <form class="form-horizontal">
         <fieldset>
         <legend>Datos basicos</legend>
+	   <div id="error" class="alert alert-error" style="display:none;" >
+	   <a class="close" data-dismiss="alert">x</a>
+	   <h3 class="alert-heading" >Lo sentimos, ha ocurrido un error</h3>
+	   <h4 class="alert-heading" id="errorMessage">No se encontraron cuentas</h4>
+	   </div>
+        
         <div class="control-group">
             <label class="control-label" for="accountType">Tipo de cuenta</label>
             <div class="controls">
@@ -151,19 +171,17 @@
             </div>
          </div>
          <div class="control-group">
-         	<label class="control-label" for="accountBank">Banco</label>
+         	<label class="control-label" for="bank">Banco</label>
             <div class="controls">
             	<div class="form-inline">
-                <select name="accountBank" id="accountBank" class="input-xlarge">
-                <option value="1">Argentina - Banco Galicia</option>
-                <option value="2">Argentina - Standard Bank</option>
-                <option value="3">Argentina - Banco Rio Santander</option>
+                <select name="bank" id="bank" class="input-xlarge">
                 </select>
-                
-                <label for="onlyMyCountry"> <input type="checkbox" value="1" id="onlyMyCountry" checked="checked" class="checkbox"> Ver solo bancos de mi pais </label>
+                <span id="bankLoading" style="display:none;"><img src="static/images/loading.gif" alt="Loading..." /></span>
+                <label for="onlyMyCountry"> <input type="checkbox" value="{MY_COUNTRY_ID}" id="onlyMyCountry" class="checkbox"> Ver solo bancos de <img src="static/images/flags/{MY_COUNTRY_ISO}.png" title="{MY_COUNTRY_DESCRIPTION}" alt="{MY_COUNTRY_DESCRIPTION}" />({MY_COUNTRY_DESCRIPTION})
+                </label>
 
                 </div>
-                 <div class="alert alert-info help-block" >
+                 <div id="noImportBank" class="alert alert-info help-block" style="display:none;" >
                     <strong>Nota</strong> Este banco aun no es compatible con nuestro modulo de "<a href="wiki/Importando_archivos_de_bancos">Importar movimientos</a>", ayudanos a <a href="wiki/Importando_archivos_de_bancos#Mi_banco_no_es_compatible">incluirlo</a>! 
                  </div>
             </div>            

@@ -42,13 +42,15 @@ class AccountManagment {
 			$dao = Doctrine::getTable('Bank');
 			$q = $dao->createQuery()
 			->from(' Bank b ');
+			$q->innerJoin(' b.Country a ');
+			$q->where(' 1=1 ');
 			if(!empty($idCountry)){
-				$with = ' with a.id=' . $idCountry;
+				$q->addWhere('b.country=' . $idCountry);
 			}
-			$q->innerJoin(' b.Country a ' . $with);
-			$q->where(' 1=1 ')
-			->addWhere(' b.deleted is null ')
-			->orderBy(' b.description ');
+			$q->addWhere(' b.deleted is null ')
+			->orderBy(' a.short_name, b.description ');
+			
+			
 			$result = $q->setHydrationMode(Doctrine::HYDRATE_ARRAY)->fetchArray();
 	
 		} catch(Exception $e){

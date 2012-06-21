@@ -15,7 +15,7 @@ try {
 	
 	SecurityCheck::checkAjaxRequest();
 	
-	$idCountry = SecurityCheck::sanitize($_GET['idCountry']);
+	$idCountry = SecurityCheck::sanitize($_POST['country']);
 	
 	//get banks list
 	$am = new AccountManagment();
