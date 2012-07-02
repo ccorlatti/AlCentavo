@@ -21,37 +21,20 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-        <script src="static/js/jquery.js"></script>
+    
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/base/onload.event.js"></script>
+    <script src="static/js/jquery.validate.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/bootstrap-tooltip.js"></script>
     <script src="static/js/bootstrap-popover.js"></script>  
     <script src="static/js/alcentavo/AccountManagment.helper.js"></script>
-    <script language="javascript">
-	$(document).ready(function() {
-
-		//load banks
-		var check = $('#onlyMyCountry');
-		AccountManagment.loadBanks(check.is(':checked') ? check.val() : '')
-		
-		//listeners
-		check.bind('change', function(){
-				var check = $('#onlyMyCountry');
-				AccountManagment.loadBanks(check.is(':checked') ? check.val() : '');
-		});
-		
-		var banks = $('#bank');
-		banks.bind('change', function(){
-			$('#bank option:selected').hasClass('noImport') ? $('#noImportBank').show() : $('#noImportBank').hide();
-		});
-
-	});
-
-	</script>
+        
+    
   </head>
 
   <body>
@@ -134,25 +117,46 @@
 
 
     <div class="row-fluid">
-    
-
-    
+   
+    {OPT_ERROR}
+	<div class="alert alert-error" >
+            <h3 class="alert-heading">{ERROR}</h3>
+            <br>
+            <p>
+            Podes contactarte con nuestro equipo o consultar la ayuda en linea si tenes dudas sobre lo que este error significa.
+            </p>
+            <p align=center>
+            <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver</strong></a>
+            </p>                
+    </div>
+	{/OPT_ERROR}
+    {OPT_FORM}
     <div class="span12">
     <div class="row-fluid">
-	<div class="span6"><h4 class="well well-small">Nueva cuenta</h4></div>
+	<div class="span6"><h4 class="well well-small">Crear/Editar cuenta</h4></div>
     <div class="span6"> 
     	<div class="pull-right">
-        <a href="#" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver</strong></a>
-	    <a href="#" class="btn btn-large btn-danger"><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>        
-    	<a href="#" class="btn btn-large btn-success"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
-	    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a>        
+    	<span class="actionButtons">
+        <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver</strong></a>
+        
+	    {OPT_DELETE_BUTTON}
+	    <a href="#" class="btn btn-large btn-danger"><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>
+	    {/OPT_DELETE_BUTTON}        
+    	<a href="#" id="accoundEditSaveButton" class="btn btn-large btn-success"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
+	    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a>
+	    </span>
+	    <span id="actionLoading" style="display:none;"><img src="static/images/loading.gif" alt="working..." /></span>        
         </div>
     </div>
 	</div>
     
-        <form class="form-horizontal">
+        <form class="form-horizontal"  id="accountEditForm" name="accountEditForm" action="#" method="post">
+        
+        <input type="hidden" id="idAccount" name="idAccount" value="{ID_ACCOUNT}" />
+        <input type="hidden" id="action" name="action" />
+        
         <fieldset>
-        <legend>Datos basicos</legend>
+        <legend>Datos de la cuenta</legend>
 	   <div id="error" class="alert alert-error" style="display:none;" >
 	   <a class="close" data-dismiss="alert">x</a>
 	   <h3 class="alert-heading" >Lo sentimos, ha ocurrido un error</h3>
@@ -160,7 +164,7 @@
 	   </div>
         
         <div class="control-group">
-            <label class="control-label" for="accountType">Tipo de cuenta</label>
+            <label class="control-label" for="accountType">Tipo de cuenta *</label>
             <div class="controls">
                 <select name="accountType" id="accountType" class="input-xlarge">
                 {ROW_ACCOUNT_TYPE}
@@ -171,7 +175,7 @@
             </div>
          </div>
          <div class="control-group">
-         	<label class="control-label" for="bank">Banco</label>
+         	<label class="control-label" for="bank">Banco *</label>
             <div class="controls">
             	<div class="form-inline">
                 <select name="bank" id="bank" class="input-xlarge">
@@ -188,7 +192,7 @@
             </div>
         
         <div class="control-group">
-            <label class="control-label" for="accountDescription">Descripcion</label>
+            <label class="control-label" for="accountDescription">Descripcion *</label>
             <div class="controls">
                 <input type="text" name="accountDescription" id="accountDescription" class="input-xlarge" />
                 <p class="help-block">Esta descripcion identificara la cuenta en las diferentes secciones del sitio.</p>
@@ -199,18 +203,38 @@
         <div class="control-group">
             <label class="control-label" for="accountInitialBalance">Saldo inicial</label>
             <div class="controls">
-                <input type="number" name="accountInitialBalance" id="accountInitialBalance" class="input-small" placeholder="0.00" />
+                <input type="text" name="accountInitialBalance" id="accountInitialBalance" class="input-small ammount" placeholder="0.00" />
                 <p class="help-block">El saldo inicial de la cuenta al momento de ser generada. Se ingresara un movimiento de "<a href="wiki/Acerca_de_los_Movimientos#Ajuste_de_saldo">Ajuste de saldo</a>" con el importe aqui ingresado.</p>
             </div>
          </div>               
         
+        <div class="control-group">
+            <label class="control-label" for="accountType">Moneda *</label>
+            <div class="controls">
+                <select name="currency" id="currency" class="input-xlarge">
+                {ROW_ACCOUNT_CURRENCY}
+                <option value="{ACCOUNT_CURRENCY_ID}" {ACCOUNT_CURRENCY_SELECTED}>{ACCOUNT_CURRENCY_DESCRIPTION}</option>
+                {/ROW_ACCOUNT_CURRENCY}
+                </select>
+            </div>
+         </div>        
         </fieldset>
         </form>
      </div>   
-    
+     
+
+    </div>
+    	<div class="alert alert-success" style="display:none;" id="confirmation">
+            <h3 class="alert-heading">Los datos se grabaron correctamente!</h3>
+            <br>
+            <p align=center>
+            <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver al listado</strong></a>
+            <a href="accountsEdit.php"  class="btn btn-large btn-success"><i class="icon-plus icon-white"></i> <strong>Crear una nueva cuenta</strong></a>
+            
+            </p>                
     </div>
 
-
+{/OPT_FORM}
 	<footer class="footer">
         <p class="pull-right"><img src="static/images/verisign.gif" /></p>
         <p>&copy; 2012 - <strong>AlCentavo: Contabilidad y finanzas personales</strong></p>

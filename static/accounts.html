@@ -125,70 +125,76 @@
     
     <div class="span12">
     <div class="row">
-	<div class="span9"><h4 class="well well-small">Cuentas existentes</h4></div>
-    <div class="span3"> <a href="accountsEdit.php" class="btn btn-large btn-success"><i class="icon-plus-sign icon-white"></i> <strong>Nueva Cuenta</strong></a>
-    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a> 
+	<div class="span6"><h4 class="well well-small">Cuentas existentes</h4></div>
+    <div class="span5">
+    <div class="pull-right"> <a href="accountsEdit.php" class="btn btn-large btn-success"><i class="icon-plus-sign icon-white"></i> <strong>Nueva Cuenta</strong></a>
+    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a> </div>
     </div>
 	</div>
-	
-	{ROW_ACCOUNTS}
-    <table class="table table-striped table-condensed">
-    <thead>
-    <tr>
-    <th>Tipo de cuenta</th>
-    <th>Banco</th>
-    <th>Descripcion</th>
-    <th>Moneda</th>
-    <th><span class="pull-right">Balance</span></th>
-    <th></th>        
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Efectivo</td>
-    <td>-</td>
-    <td><strong>Mi Efectivo</strong></td>
-    <td>Pesos Argentinos (ARP)</td>
-    <td><span class="pull-right negativo">1700.00$</span></td>
-    <td><i class="icon-pencil"></i> <i class="icon-remove"></i></td>
-    </tr>    
-    <tr>
-    <td>Bancaria</td>
-    <td>Argentina - Banco Galicia</td>
-    <td><strong>Caja de ahorro</strong></td>
-    <td>12/02/2015
-    </td>
-    <td><span class="pull-right negativo">1700.00$</span></td>
-    <td><i class="icon-pencil"></i> <i class="icon-remove"></i></td>
-    </tr>
-
-    <tr>
-    <td>Bancaria</td>
-    <td>Argentina - Standard Bank</td>
-    <td><strong>Caja de ahorro (por el auto)</strong></td>
-    <td>12/02/2015
-    </td>
-    <td><span class="pull-right negativo">1700.00$</span></td>
-    <td><i class="icon-pencil"></i> <i class="icon-remove"></i></td>
-    </tr>    
-    
- 
-                                          
-    </tbody>
-    </table>  
-    
-    {/ROW_ACCOUNTS}
-    
-    <div class="alert alert-error span8" >
-    <a class="close" data-dismiss="alert">x</a>
-    <h3 class="alert-heading">No se encontraron cuentas</h3>
-    <h4>Por el momento no tenes cuentas, podes crear una haciendo click en el boton "Nueva cuenta"</h4>
-	<br/><p>Accede a la ayuda <a href="">aqui</a> para saber mas</p>
+	<div class="row">
+		<div class="span12">
+		{ROW_ACCOUNTS}
+	    <table class="table table-striped ">
+	    <thead>
+	    <tr>
+	    <th>Tipo de cuenta</th>
+	    <th>Banco</th>
+	    <th>Descripcion</th>
+	    <th>Moneda</th>
+	    <th><span class="pull-right">Balance</span></th>
+	    <th></th>        
+	    </tr>
+	    </thead>
+	    <tbody>
+	    {ROW_ACCOUNT}
+	    <tr>
+	    <td>{ACCOUNT_TYPE}</td>
+	    <td>{ACCOUNT_BANK}</td>
+	    <td><strong>{ACCOUNT_DESCRIPTION}</strong></td>
+	    <td>{ACCOUNT_CURRENCY}</td>
+	    <td><span class="pull-right negativo">{ACCOUNT_BALANCE}</span></td>
+	   <td >
+	   
+			<div class="btn-group pull-right">
+			    <a href="#{ACCOUNT_ID}" class="btn btn-success"><i class="icon-white icon-pencil"></i> Editar</a>
+			    <button class="btn dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret "></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <li>
+			    <a href="#" ><i class="icon-pencil"></i> Editar</a>
+			    </li>
+			    <li>
+			    <a href="#" ><i class="icon-th"></i> Opciones avanzadas</a>
+			    </li>
+			    <li class="divider"></li>    
+			    <li>
+				<a href="#"><i class="icon-remove-sign"></i> Eliminar</a>
+				</li>
+				</ul>
+			</div>	   
+	   
+	     </td>
+	    </tr>  
+	 	{/ROW_ACCOUNT}                     
+	    </tbody>
+	    </table>
+	    {/ROW_ACCOUNTS}
+	    </div>
+	    
+	    
+	    
+	    {ROW_NO_ACCOUNTS}
+	    <div class="alert alert-error span8" >
+	    <a class="close" data-dismiss="alert">x</a>
+	    <h3 class="alert-heading">No se encontraron cuentas</h3>
+	    <h4>Por el momento no tenes cuentas, podes crear una haciendo click en el boton "Nueva cuenta"</h4>
+		<br/><p>Accede a la ayuda <a href="">aqui</a> para saber mas</p>
+	    </div>
+	    {/ROW_NO_ACCOUNTS}
     </div>
-    
     </div>
-    </div>
-
+</div>
 
 	<footer class="footer">
         <p class="pull-right"><img src="static/images/verisign.gif" /></p>
