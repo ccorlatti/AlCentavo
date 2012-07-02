@@ -1271,6 +1271,7 @@ select:focus:required:invalid:focus {
 .help-block {
   display: block;
   margin-bottom: 9px;
+	font-style: italic;
 }
 .help-inline {
   display: inline-block;
