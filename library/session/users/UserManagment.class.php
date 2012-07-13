@@ -23,6 +23,14 @@ class UserManagment {
 			$user['username'] = $username;
 			$user['name'] = $name;
 			$user['validationCode'] = sha1($username . $mail);
+			
+			$userData = new Userdata();
+			$userData['avatar'] = '';
+			$userData['country'] = 11;
+			$userData['currency'] = 1;
+			
+			$user->Userdata[] = $userData;			
+			
 			$user->save();
 			
 			//user disabled to avoid login on inactive accounts
