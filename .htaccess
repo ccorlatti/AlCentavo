@@ -4,4 +4,4 @@ RewriteRule ^dashboard$ dashboard.php [NC,L]
 
 RewriteRule ^accounts$ accounts.php [NC,L]
 RewriteRule ^accountsEdit-([0-9]+)$ accountsEdit.php?idAccount=$1 [NC,L]
-RewriteRule ^accountsDelete-([0-9]+)$ accountsEdit.php?idAccount=$1&action=delete [NC,L]
+#RewriteRule ^accountsDelete-([0-9]+)$ accountsEdit.php?idAccount=$1&action=delete [NC,L]

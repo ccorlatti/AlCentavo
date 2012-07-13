@@ -33,11 +33,6 @@ try {
 		if(!$permission){
 			throw new Exception('Ups! no tenes permiso para operar sobre esta cuenta.');
 		}
-
-		//delete
-		if($action == 'delete'){
-			echo 'deleted';
-		}
 		
 		$tpl->cParse('OPT_DELETE_BUTTON');
 		$tpl->cParse('OPT_DELETE_BUTTON_FOOTER');
