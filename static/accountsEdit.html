@@ -142,7 +142,7 @@
 	    {OPT_DELETE_BUTTON}
 	    <a href="#" class="btn btn-large btn-danger"><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>
 	    {/OPT_DELETE_BUTTON}        
-    	<a href="#" id="accoundEditSaveButton" class="btn btn-large btn-success"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
+    	<a href="#" id="accountEditSaveButton" class="btn btn-large btn-success"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
 	    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a>
 	    </span>
 	    <span id="actionLoading" style="display:none;"><img src="static/images/loading.gif" alt="working..." /></span>        
@@ -168,16 +168,17 @@
             <div class="controls">
                 <select name="accountType" id="accountType" class="input-xlarge">
                 {ROW_ACCOUNT_TYPE}
-                <option value="{ACCOUNT_TYPE_ID}" {ACCOUNT_TYPE_SELECTED}>{ACCOUNT_TYPE_DESCRIPTION}</option>
+                <option value="{ACCOUNT_TYPE_ID}" {ACCOUNT_TYPE_SELECTED} class="{REQUIRE_BANK}">{ACCOUNT_TYPE_DESCRIPTION}</option>
                 {/ROW_ACCOUNT_TYPE}
                 </select>
                 <p class="help-block">El tipo de cuenta definira el comportamiento de esta, podes leer en la <a href="wiki/Acerca_de_las_Cuentas#Tipos_de_cuenta">ayuda</a> las diferencias en detalle.</p>
             </div>
          </div>
-         <div class="control-group">
+         <div class="control-group" id="bankInput">
          	<label class="control-label" for="bank">Banco *</label>
             <div class="controls">
             	<div class="form-inline">
+            	<input type="hidden" id="bankSelected" name="bankSelected" value="{BANK_SELECTED}" />
                 <select name="bank" id="bank" class="input-xlarge">
                 </select>
                 <span id="bankLoading" style="display:none;"><img src="static/images/loading.gif" alt="Loading..." /></span>
@@ -194,7 +195,7 @@
         <div class="control-group">
             <label class="control-label" for="accountDescription">Descripcion *</label>
             <div class="controls">
-                <input type="text" name="accountDescription" id="accountDescription" class="input-xlarge" />
+                <input type="text" name="accountDescription" id="accountDescription" class="input-xlarge" value="{ACCOUNT_DESCRIPTION}" />
                 <p class="help-block">Esta descripcion identificara la cuenta en las diferentes secciones del sitio.</p>
 
             </div>
@@ -203,7 +204,7 @@
         <div class="control-group">
             <label class="control-label" for="accountInitialBalance">Saldo inicial</label>
             <div class="controls">
-                <input type="text" name="accountInitialBalance" id="accountInitialBalance" class="input-small ammount" placeholder="0.00" />
+                <input type="text" name="accountInitialBalance" id="accountInitialBalance" class="input-small ammount" placeholder="0.00" value="{ACCOUNT_INITIAL_BALANCE}"/>
                 <p class="help-block">El saldo inicial de la cuenta al momento de ser generada. Se ingresara un movimiento de "<a href="wiki/Acerca_de_los_Movimientos#Ajuste_de_saldo">Ajuste de saldo</a>" con el importe aqui ingresado.</p>
             </div>
          </div>               

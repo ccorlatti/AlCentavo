@@ -26,31 +26,37 @@ try {
 	//am i editing?	
 	$tpl->cSet('ID_ACCOUNT', $idAccount);
 	if(!empty($idAccount)){
-		$tpl->cParse('OPT_DELETE_BUTTON');
-		
 		//check permission
 		$idUser = $_SESSION['user']['id'];
 		$permission = empty($idAccount) ? true : $am->doIHavePermissionForThisAccount($idAccount, $idUser);
 		if(!$permission){
 			throw new Exception('Ups! no tenes permiso para operar sobre esta cuenta.');
-		}		
+		}
+
+		$tpl->cParse('OPT_DELETE_BUTTON');
+		
+		$account = $am->getAccountById($idAccount);
+		$tpl->cSet('ACCOUNT_DESCRIPTION', $account['description']);
+		$tpl->cSet('BANK_SELECTED', $account['idBank']);
+		
 	}
 	
 	//account types
-	
 	$accountTypes = $am->getAccountTypes($idAccount);
 	foreach($accountTypes as $accountType){
 		$tpl->cSet('ACCOUNT_TYPE_ID',$accountType['id']);
 		$tpl->cSet('ACCOUNT_TYPE_DESCRIPTION',$accountType['description']);
-		$tpl->cSet('ACCOUNT_TYPE_SELECTED',empty($accountType['Account']['id']) ? '' : 'selected');
+		$tpl->cSet('ACCOUNT_TYPE_SELECTED', count($accountType['Account']) > 0 ? 'selected' : '');
+		$tpl->cSet('REQUIRE_BANK', $accountType['bankRequired'] == 1 ? 'bankRequired' : 'bankOptional');
 		$tpl->cParse('ROW_ACCOUNT_TYPE');
 	}
 	
+	//available currencies
 	$currencies = $am->getCurrencies($idAccount);
 	foreach($currencies as $currency){
 		$tpl->cSet('ACCOUNT_CURRENCY_ID',$currency['id']);
 		$tpl->cSet('ACCOUNT_CURRENCY_DESCRIPTION',$currency['description'] . ' (' . $currency['symbol'] . ')');
-		$tpl->cSet('ACCOUNT_CURRENCY_SELECTED', empty($currency['Account']['id']) ? '' : 'selected');
+		$tpl->cSet('ACCOUNT_CURRENCY_SELECTED', count($currency['Account']) > 0 ? 'selected' : '');
 		$tpl->cParse('ROW_ACCOUNT_CURRENCY');
 	}
 	

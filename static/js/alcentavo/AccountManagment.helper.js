@@ -11,20 +11,37 @@ $(function(){
 	});
 	
 	var banks = $('#bank');
+	var accountType = $('#accountType');
+	accountType.bind('change', function(){
+		AccountManagment.requiredBank();
+	});
+	
+	
 	banks.bind('change', function(){
 		$('#bank option:selected').hasClass('noImport') ? $('#noImportBank').show() : $('#noImportBank').hide();
 	});
 	
+	AccountManagment.requiredBank();
 	
 	AccountManagment.validateAccountForm();
 	
-	$('#accoundEditSaveButton').bind('click', function(){ $('#accountEditForm').submit();  });	
+	$('#accountEditSaveButton').bind('click', function(){ $('#accountEditForm').submit();  });	
 	
 });
 
 
 var AccountManagment = {
-		
+		requiredBank: function(){
+			if($('#accountType option:selected').hasClass('bankRequired')){
+				$('#bankInput').show();
+				var check = $('#onlyMyCountry');
+				AccountManagment.loadBanks(check.is(':checked') ? check.val() : '')
+			} else {
+				$('#bank').empty();
+				$('#bank').val(0);
+				$('#bankInput').hide();
+			}
+		},
 		loadBanks: function(country){
 			
 			try {
@@ -71,7 +88,7 @@ var AccountManagment = {
 					className = rs[i].import == '1' ? 'import' : 'noImport';
 					
 					$('#bank')
-						.append($('<option class="' + className + '" value="'+ idBank +'">', { idBank : description })
+						.append($('<option class="' + className + '" value="'+ idBank +'" ' + this.selectedBank(idBank) + '>', { idBank : description })
 						.text(description)); 
 				}
 				$('#bank').change();
@@ -81,6 +98,19 @@ var AccountManagment = {
 			}
 		},
 		
+		selectedBank: function(idBank){
+			var result = '';
+			try {
+				if(idBank == $('#bankSelected').val()){
+					result = 'selected';
+				}
+			} catch (e) {
+				AccountManagment.errorHandler(e.message);
+			}
+			return result;
+		},
+		
+		
 		validateAccountForm: function(){
 			try {
 				return $('#accountEditForm').validate({
@@ -89,7 +119,7 @@ var AccountManagment = {
 							required: true
 						},
 						bank: {
-							required: true
+							required: false
 						},
 						accountDescription: {
 							required: true,

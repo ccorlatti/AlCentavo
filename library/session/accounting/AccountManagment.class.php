@@ -13,6 +13,25 @@ class AccountManagment {
 	
 	}
 	
+	
+	public function getAccountById($idAccount) {
+		$result = false;
+		try {
+	
+			$dao = Doctrine::getTable('Account');
+			$q = $dao->createQuery()
+				->from(' Account a ')
+				->leftJoin(' a.AccountOptions op ')
+				->addWhere(' a.id = ? ', $idAccount);
+
+			$result = $q->setHydrationMode(Doctrine::HYDRATE_ARRAY)->fetchArray();
+	
+		} catch(Exception $e){
+			throw $e;
+		}
+		return $result[0];
+	}
+	
 	public function getAccountTypes($idAccount) {
 		$result = false;
 		try {
@@ -26,6 +45,7 @@ class AccountManagment {
 			$q->where(' 1=1 ')
 			
 			->orderBy(' t.description ');
+			
 			$result = $q->setHydrationMode(Doctrine::HYDRATE_ARRAY)->fetchArray();
 	
 		} catch(Exception $e){

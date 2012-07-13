@@ -25,7 +25,7 @@ abstract class BaseAccount extends Doctrine_Record {
         $this->setTableName('account');
         $this->hasColumn('id', 'integer', 4, array('type' => 'integer', 'length' => 4, 'primary' => true, 'autoincrement' => true));
         $this->hasColumn('description', 'string', 60, array('type' => 'string', 'length' => 60, 'notnull' => true));
-        $this->hasColumn('idBank', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
+        $this->hasColumn('idBank', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => false));
         $this->hasColumn('idUser', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
         $this->hasColumn('idEntity', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
         $this->hasColumn('idCurrency', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
