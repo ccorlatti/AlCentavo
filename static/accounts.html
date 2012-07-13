@@ -29,7 +29,9 @@
         <script src="static/js/jquery.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/bootstrap-tooltip.js"></script>
-    <script src="static/js/bootstrap-popover.js"></script>  
+    <script src="static/js/bootstrap-popover.js"></script>
+    <script src="static/js/bootstrap-bootbox.js"></script>
+    <script src="static/js/alcentavo/AccountManagmentList.helper.js"></script>  
     <script language="javascript">
 	$(document).ready(function() {
 
@@ -124,13 +126,23 @@
 
     
     <div class="span12">
-    <div class="row">
+    <div class="row-fluid">
 	<div class="span6"><h4 class="well well-small">Cuentas existentes</h4></div>
-    <div class="span5">
+    <div class="span6">
     <div class="pull-right"> <a href="accountsEdit.php" class="btn btn-large btn-success"><i class="icon-plus-sign icon-white"></i> <strong>Nueva Cuenta</strong></a>
     <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a> </div>
     </div>
+    <div class="row-fluid">
+    <div class="span12">
+    	<div id="actionLoading" align=center style="display:none;"><img src="static/images/loading.gif" alt="working..." /></div>
+		<div class="alert alert-success" style="display:none;" id="confirmationDelete">
+            <h3 class="alert-heading">La cuenta fue eliminada correctamente!</h3>               
+    	</div> 
+    	<div id="error" class="alert alert-error" style="display:none;" >
+    	</div>
+    </div>
 	</div>
+	
 	<div class="row">
 		<div class="span12">
 		{ROW_ACCOUNTS}
@@ -147,7 +159,7 @@
 	    </thead>
 	    <tbody>
 	    {ROW_ACCOUNT}
-	    <tr>
+	    <tr id="row-{ACCOUNT_ID}">
 	    <td>{ACCOUNT_TYPE}</td>
 	    <td>{ACCOUNT_BANK}</td>
 	    <td><strong>{ACCOUNT_DESCRIPTION}</strong></td>
@@ -169,7 +181,7 @@
 			    </li>
 			    <li class="divider"></li>    
 			    <li>
-				<a href="accountsDelete-{ACCOUNT_ID}"><i class="icon-remove-sign"></i> Eliminar</a>
+				<a href="#" onClick="AccountManagmentList.deleteAccount({ACCOUNT_ID});"><i class="icon-remove-sign"></i> Eliminar</a>
 				</li>
 				</ul>
 			</div>	   

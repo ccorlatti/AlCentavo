@@ -19,6 +19,7 @@ try {
 	
 	//request parameters
 	$idAccount = SecurityCheck::sanitize($_GET['idAccount']);
+	$action = SecurityCheck::sanitize($_GET['action']);
 	
 
 	$am = new AccountManagment();
@@ -33,8 +34,13 @@ try {
 			throw new Exception('Ups! no tenes permiso para operar sobre esta cuenta.');
 		}
 
-		$tpl->cParse('OPT_DELETE_BUTTON');
+		//delete
+		if($action == 'delete'){
+			echo 'deleted';
+		}
 		
+		$tpl->cParse('OPT_DELETE_BUTTON');
+		$tpl->cParse('OPT_DELETE_BUTTON_FOOTER');
 		$account = $am->getAccountById($idAccount);
 		$tpl->cSet('ACCOUNT_DESCRIPTION', $account['description']);
 		$tpl->cSet('BANK_SELECTED', $account['idBank']);

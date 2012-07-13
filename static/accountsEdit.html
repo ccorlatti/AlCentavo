@@ -31,7 +31,8 @@
     <script src="static/js/jquery.validate.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/bootstrap-tooltip.js"></script>
-    <script src="static/js/bootstrap-popover.js"></script>  
+    <script src="static/js/bootstrap-popover.js"></script>
+    <script src="static/js/bootstrap-bootbox.js"></script>  
     <script src="static/js/alcentavo/AccountManagment.helper.js"></script>
         
     
@@ -140,9 +141,9 @@
         <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver</strong></a>
         
 	    {OPT_DELETE_BUTTON}
-	    <a href="#" class="btn btn-large btn-danger"><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>
+	    <a href="#" class="btn btn-large btn-danger deleteAccount" ><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>
 	    {/OPT_DELETE_BUTTON}        
-    	<a href="#" id="accountEditSaveButton" class="btn btn-large btn-success"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
+    	<a href="#" class="btn btn-large btn-success accountEditSaveButton"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
 	    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a>
 	    </span>
 	    <span id="actionLoading" style="display:none;"><img src="static/images/loading.gif" alt="working..." /></span>        
@@ -221,6 +222,22 @@
          </div>        
         </fieldset>
         </form>
+        
+             
+    	<div class="pull-right">
+    	<span class="actionButtons">
+        <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver</strong></a>
+        
+	    {OPT_DELETE_BUTTON_FOOTER}
+	    <a href="#" class="btn btn-large btn-danger deleteAccount" ><i class="icon-remove-sign icon-white"></i> <strong>Borrar</strong></a>
+	    {/OPT_DELETE_BUTTON_FOOTER}        
+    	<a href="#" class="btn btn-large btn-success accountEditSaveButton"><i class="icon-ok-sign icon-white"></i> <strong>Grabar Cambios</strong></a>
+	    <a href="#" class="btn btn-large btn-inverse"><i class="icon-question-sign icon-white"></i></a>
+	    </span>
+	    <span id="actionLoading" style="display:none;"><img src="static/images/loading.gif" alt="working..." /></span>        
+        </div>
+        
+        
      </div>   
      
 
@@ -234,6 +251,16 @@
             
             </p>                
     </div>
+    
+    	<div class="alert alert-success" style="display:none;" id="confirmationDelete">
+            <h3 class="alert-heading">La cuenta fue eliminada correctamente!</h3>
+            <br>
+            <p align=center>
+            <a href="accounts.php" class="btn btn-large btn-info"><i class="icon-chevron-left icon-white"></i> <strong>Volver al listado</strong></a>
+            <a href="accountsEdit.php"  class="btn btn-large btn-success"><i class="icon-plus icon-white"></i> <strong>Crear una nueva cuenta</strong></a>
+            
+            </p>                
+    </div>    
 
 {/OPT_FORM}
 	<footer class="footer">

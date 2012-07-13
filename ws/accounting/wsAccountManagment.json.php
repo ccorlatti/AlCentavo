@@ -47,7 +47,7 @@ try {
 			
 			break;
 		case 'delete':
-			
+			$accountManagment->deleteAccount($idAccount);
 			break;
 	}
 	
